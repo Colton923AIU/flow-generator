@@ -10,8 +10,8 @@ import { userConfig, sharePointListMap } from '../../config/user-config';
  * Email template placeholders that will be replaced in the notification emails
  */
 export const EMAIL_PLACEHOLDERS = {
-  STUDENT_ID: '{StudentId}',
-  STATUS: '{Status}'
+  STUDENT_ID: '[[STUDENTID]]',
+  STATUS: '[[STATUS]]'
 };
 
 /**

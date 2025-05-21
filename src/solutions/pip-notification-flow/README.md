@@ -40,8 +40,8 @@ This workflow solves several key challenges:
   "inputs": {
     "parameters": {
       "request/to": "advisor@university.edu",
-      "request/subject": "Action Needed - Status Change for {StudentId}",
-      "request/text": "<p>The status for student ID {StudentId} has been changed to {Status}. Please follow up as needed.</p>",
+      "request/subject": "Action Needed - Status Change for [[STUDENTID]]",
+      "request/text": "<p>The status for student ID [[STUDENTID]] has been changed to [[STATUS]]. Please follow up as needed.</p>",
       "request/cc": "department@university.edu",
       "request/bcc": "records@university.edu"
     },
@@ -56,8 +56,8 @@ This workflow solves several key challenges:
   "inputs": {
     "parameters": {
       "request/to": "student-services@university.edu",
-      "request/subject": "Records Update - {StudentId} Status Change",
-      "request/text": "<p>This is a notification that student {StudentId} has had their status changed to {Status}.</p>",
+      "request/subject": "Records Update - [[STUDENTID]] Status Change",
+      "request/text": "<p>This is a notification that student [[STUDENTID]] has had their status changed to [[STATUS]].</p>",
       "request/cc": "",
       "request/bcc": "records@university.edu"
     },
@@ -109,8 +109,8 @@ npm run generate -- --example pip-notification-flow --statusFieldName "StudentSt
 
 The flow automatically replaces these placeholders in email templates:
 
-- `{StudentId}` - The Title field from the main list
-- `{Status}` - The new status value
+- `[[STUDENTID]]` - The Title field from the main list
+- `[[STATUS]]` - The new status value
 
 ## Handling Single vs Multiple Emails
 
@@ -141,4 +141,6 @@ Power Automate has some limitations in its expression language compared to JavaS
 
 - **Nullish Coalescing Operator (`??`)**: This operator is not supported in Power Automate expressions. Instead, we use the `if(equals(value, null), defaultValue, value)` pattern.
 
-For more details on compatibility issues and best practices, see the [Compatibility Guidelines](../../docs/COMPATIBILITY.md). 
+- **Template Placeholders**: Avoid using curly braces `{}` in template placeholders as they conflict with Power Automate expression syntax. We use double square brackets instead (e.g., `[[STUDENTID]]` instead of `{StudentId}`).
+
+For more details on compatibility issues and best practices, see the [Compatibility Guidelines](../../docs/COMPATIBILITY.md).

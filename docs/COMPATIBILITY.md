@@ -15,6 +15,35 @@ The following JavaScript operators are **not supported** in Power Automate expre
 | Nullish coalescing (`??`) | `value ?? 'default'` | `if(equals(value, null), 'default', value)` |
 | Optional chaining with nullish coalescing | `obj?.prop ?? 'default'` | `if(equals(obj?['prop'], null), 'default', obj?['prop'])` |
 
+### Template Placeholders
+
+Avoid using curly braces (`{}`) in string templates that will be processed by Power Automate expressions, as they can be confused with expression syntax:
+
+| Pattern | Issue | Solution |
+|---------|-------|----------|
+| `{placeholder}` | Curly braces conflict with Power Automate's expression language | Use alternative delimiters like `[[PLACEHOLDER]]` |
+
+For example:
+
+```
+// INCORRECT - Will cause validation error
+"subject": "Status Change: {StudentId}"
+
+// CORRECT - Using alternative delimiters
+"subject": "Status Change: [[STUDENTID]]"
+```
+
+When replacing placeholders in the flow, modify your code to target these alternative delimiters:
+
+```typescript
+// Replace placeholders with actual values
+replace(
+  emailTemplate,
+  '[[STUDENTID]]',
+  studentId
+)
+```
+
 ### Best Practices
 
 1. **Use `if()` instead of `??`**: Always use the `if(equals(value, null), defaultValue, value)` pattern instead of nullish coalescing.
