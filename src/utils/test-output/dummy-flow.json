@@ -1,0 +1,16 @@
+{
+  "id": "/providers/Microsoft.Flow/flows/dummy-guid",
+  "name": "dummy-flow",
+  "type": "Microsoft.Flow/flows",
+  "properties": {
+    "apiId": "/providers/Microsoft.PowerApps/apis/shared_logicflows",
+    "displayName": "Dummy Flow",
+    "description": "A test flow",
+    "definition": {
+      "$schema": "",
+      "contentVersion": "",
+      "triggers": {},
+      "actions": {}
+    }
+  }
+}

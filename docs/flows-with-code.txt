@@ -1,0 +1,79 @@
+Work with Cloud Flows Using Code
+
+This article provides guidance on managing cloud flows within the Solutions tab of Power Automate using code. It focuses on utilizing either the Dataverse SDK for .NET or the Web API. Note that managing flows under "My Flows" is not supported through code.
+Microsoft Learn+2Microsoft Learn+2Microsoft Learn+2
+Interact with Dataverse APIs
+
+Dataverse offers two primary methods for interacting with cloud flows:
+Microsoft Learn
+
+    SDK for .NET: Recommended for .NET projects, it provides a typed object model and authentication methods.
+
+    Web API: Suitable for any technology that supports HTTP requests.
+    Microsoft Learn
+
+For .NET projects, the SDK simplifies development by offering a structured approach. For other technologies, the Web API provides flexibility through HTTP requests.
+Microsoft Learn
+Connecting to Dataverse
+Using the SDK for .NET
+
+Establish a connection by obtaining an IOrganizationService instance. This interface allows interaction with Dataverse.
+Microsoft Learn
+
+For more information, refer to:
+
+    Use the Organization service
+
+    Quickstart: Execute an Organization service request (C#)
+
+    IOrganizationService Interface
+
+Using the Web API
+
+Authenticate using OAuth to access the Web API endpoint. The base URL typically follows this format:
+
+
+https://<your org>.<region domain>.dynamics.com/api/data/v9.2
+
+For more information, refer to:
+
+    Use the Microsoft Dataverse Web API
+
+    Quick Start: Web API sample (C#)
+
+    Compose HTTP requests and handle errors
+
+    Use OAuth authentication with Microsoft Dataverse
+
+Workflow Table
+
+Cloud flows are stored in the Process (Workflow) table, represented in the Web API as the workflow EntityType. Key columns include:
+Microsoft Learn
+
+    category: Indicates the type of flow (e.g., Modern Flow, Desktop flows).
+
+    clientdata: JSON string of the flow definition and connection references.
+
+    createdby, modifiedby, ownerid: Lookup fields for user or team associations.
+
+    statecode: Status of the flow (e.g., Draft, Activated, Suspended).
+
+    type: Specifies if the flow is a definition, activation, or template.
+
+    workflowid, workflowidunique: Unique identifiers for the flow.
+
+Note: In the Web API, lookup values are single-valued navigation properties and can be expanded to retrieve related records.
+Listing Flows
+
+To retrieve cloud flows, query the workflow table. For example, to get the first active automated, instant, or scheduled flow:
+Microsoft Learn
+Using the Web API
+
+Send an HTTP GET request to:
+
+
+https://<your org>.<region domain>.dynamics.com/api/data/v9.2/workflows?$filter=category eq 5 and statecode eq 1&$top=1
+
+This query filters for modern flows (category eq 5) that are activated (statecode eq 1) and returns the top result.
+
+For detailed information and additional examples, refer to the full article: Work with cloud flows using code.
