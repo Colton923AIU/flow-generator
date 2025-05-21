@@ -134,3 +134,11 @@ The solution includes robust error handling:
 - Consider using security groups rather than individual emails in the templates
 - Only authorized users should have access to modify the EmailConfiguration JSON
 - Ensure valid JSON formatting in the EmailConfiguration field 
+
+## Compatibility Considerations
+
+Power Automate has some limitations in its expression language compared to JavaScript/TypeScript:
+
+- **Nullish Coalescing Operator (`??`)**: This operator is not supported in Power Automate expressions. Instead, we use the `if(equals(value, null), defaultValue, value)` pattern.
+
+For more details on compatibility issues and best practices, see the [Compatibility Guidelines](../../docs/COMPATIBILITY.md). 

@@ -108,7 +108,7 @@ export function configureFlow(
         "author": @{triggerBody()?['Author']?['DisplayName']},
         "authorEmail": @{triggerBody()?['Author']?['Email']},
         "createdDate": @{formatDateTime(triggerBody()?['TimeCreated'], 'yyyy-MM-dd')},
-        "department": @{triggerBody()?['${spConfig.departmentTagColumn}'] ?? 'General'},
+        "department": @{if(equals(triggerBody()?['${spConfig.departmentTagColumn}'], null), 'General', triggerBody()?['${spConfig.departmentTagColumn}'])},
         "documentType": @{if(contains(triggerBody()?['DisplayName'], '.pdf'), 'PDF', 
                          if(contains(triggerBody()?['DisplayName'], '.docx'), 'Word',
                          if(contains(triggerBody()?['DisplayName'], '.xlsx'), 'Excel', 'Other')))},

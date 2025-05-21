@@ -140,7 +140,7 @@ export function configureFlow(
       "itemId": @{triggerBody()?['ID']},
       "studentId": @{triggerBody()?['properties']?['Title']},
       "currentStatus": @{outputs('getCurrentStatus')},
-      "previousStatus": @{triggerOutputs()?['body/properties']?['${flowConfig.statusFieldName}@odata.oldValue'] ?? 'None'},
+      "previousStatus": @{if(equals(triggerOutputs()?['body/properties']?['${flowConfig.statusFieldName}@odata.oldValue'], null), 'None', triggerOutputs()?['body/properties']?['${flowConfig.statusFieldName}@odata.oldValue'])},
       "modifiedDate": @{formatDateTime(utcNow(), 'yyyy-MM-dd HH:mm')}
     }`);
     
